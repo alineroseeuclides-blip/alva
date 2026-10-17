@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f7ff">
+  <meta name="description" content="ALVA — organize sua rotina, seus estudos e seus treinos em um só lugar.">
+  <title>ALVA — Seu espaço pessoal</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#inicio" aria-label="ALVA, início">
+      <span class="brand-symbol">✳</span>
+      <span>ALVA</span>
+    </a>
+
+    <p class="nav-label">ESPAÇO PESSOAL</p>
+    <nav class="navigation" aria-label="Navegação principal">
+      <button class="nav-link active" data-page="inicio"><span>⌂</span> Início</button>
+      <button class="nav-link" data-page="rotina"><span>◷</span> Minha rotina</button>
+      <button class="nav-link" data-page="estudos"><span>▤</span> Estudos</button>
+      <button class="nav-link" data-page="treinos"><span>⌁</span> Treinos</button>
+      <button class="nav-link" data-page="habitos"><span>✳</span> Hábitos</button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-note">
+        <span class="note-icon">✦</span>
+        <p>Pequenos passos também são progresso.</p>
+      </div>
+      <button class="nav-link" data-page="configuracoes"><span>⚙</span> Configurações</button>
+      <div class="profile">
+        <div class="avatar">A</div>
+        <div><strong>Meu espaço</strong><small>Um dia de cada vez</small></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <span class="eyebrow" id="top-date">SEU ESPAÇO PESSOAL</span>
+        <div class="page-heading" id="page-heading">Visão geral</div>
+      </div>
+      <button class="icon-button" id="quick-add" title="Adicionar tarefa" aria-label="Adicionar tarefa">＋</button>
+    </header>
+
+    <section class="page active" id="page-inicio">
+      <div class="welcome panel">
+        <div class="welcome-content">
+          <span class="eyebrow">UM NOVO DIA COMEÇA</span>
+          <h1>Oi, você. <span>✳</span></h1>
+          <p>Organize suas prioridades e respeite o seu ritmo.</p>
+          <button class="primary-button" data-go="rotina">Organizar meu dia <span>→</span></button>
+        </div>
+        <div class="welcome-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="orb">✳</div>
+          <span class="spark spark-one">✦</span>
+          <span class="spark spark-two">·</span>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <div><h2>Seu progresso</h2><p>Todo avanço merece reconhecimento.</p></div>
+      </div>
+      <div class="stats-grid">
+        <article class="stat-card panel">
+          <div class="stat-icon blue-icon">✓</div>
+          <span class="muted">Tarefas concluídas</span>
+          <strong class="stat-value" id="stat-tasks">0/0</strong>
+          <span class="stat-foot">da sua rotina de hoje</span>
+        </article>
+        <article class="stat-card panel">
+          <div class="stat-icon lilac-icon">◷</div>
+          <span class="muted">Sessões de estudo</span>
+          <strong class="stat-value" id="stat-study">0</strong>
+          <span class="stat-foot">registradas hoje</span>
+        </article>
+        <article class="stat-card panel">
+          <div class="stat-icon peach-icon">✳</div>
+          <span class="muted">Hábitos realizados</span>
+          <strong class="stat-value" id="stat-habits">0/0</strong>
+          <span class="stat-foot">seu cuidado diário</span>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel content-panel">
+          <div class="section-title compact">
+            <div><h2>Prioridades de hoje</h2><p>O que você quer realizar?</p></div>
+            <button class="text-button" data-go="rotina">Ver tudo →</button>
+          </div>
+          <div id="dashboard-tasks" class="item-list"></div>
+        </section>
+        <section class="panel content-panel">
+          <div class="section-title compact">
+            <div><h2>Seus hábitos</h2><p>Constância sem cobrança.</p></div>
+            <button class="text-button" data-go="habitos">Ver tudo →</button>
+          </div>
+          <div id="dashboard-habits" class="item-list"></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="page" id="page-rotina">
+      <div class="page-intro">
+        <span class="eyebrow">SEU DIA, DO SEU JEITO</span>
+        <h1>Minha rotina</h1>
+        <p>Coloque suas ideias em ordem, uma tarefa por vez.</p>
+      </div>
+      <section class="panel content-panel">
+        <form id="task-form" class="add-form">
+          <input id="task-title" maxlength="120" placeholder="O que você precisa fazer?" required>
+          <input id="task-time" type="time" aria-label="Horário da tarefa">
+          <select id="task-category" aria-label="Categoria da tarefa">
+            <option value="Pessoal">Pessoal</option>
+            <option value="Estudos">Estudos</option>
+            <option value="Treino">Treino</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <button class="primary-button" type="submit">＋ Adicionar</button>
+        </form>
+        <div class="filter-row">
+          <span id="task-summary" class="muted">Suas tarefas</span>
+          <select id="task-filter" aria-label="Filtrar tarefas">
+            <option value="todas">Todas</option>
+            <option value="pendentes">Pendentes</option>
+            <option value="concluidas">Concluídas</option>
+          </select>
+        </div>
+        <div id="all-tasks" class="item-list"></div>
+      </section>
+    </section>
+
+    <section class="page" id="page-estudos">
+      <div class="page-intro">
+        <span class="eyebrow">UM PASSO DE CADA VEZ</span>
+        <h1>Meus estudos</h1>
+        <p>Aprenda no seu ritmo e acompanhe sua dedicação.</p>
+      </div>
+      <div class="stats-grid two-stats">
+        <article class="panel stat-card">
+          <span class="muted">Tempo estudado hoje</span>
+          <strong class="stat-value" id="study-total">0 min</strong>
+          <span class="stat-foot">tempo registrado por você</span>
+        </article>
+        <article class="panel stat-card">
+          <span class="muted">Sessões concluídas</span>
+          <strong class="stat-value" id="study-sessions">0</strong>
+          <span class="stat-foot">no dia de hoje</span>
+        </article>
+      </div>
+      <section class="panel content-panel">
+        <h2>Registrar sessão de estudo</h2>
+        <form id="study-form" class="form-grid">
+          <label>Matéria<input id="study-subject" maxlength="80" placeholder="Ex.: Matemática" required></label>
+          <label>Duração
+            <select id="study-duration">
+              <option value="15">15 minutos</option>
+              <option value="25" selected>25 minutos</option>
+              <option value="30">30 minutos</option>
+              <option value="45">45 minutos</option>
+              <option value="60">1 hora</option>
+              <option value="90">1h30</option>
+              <option value="120">2 horas</option>
+            </select>
+          </label>
+          <label class="full-width">O que você estudou? <input id="study-notes" maxlength="180" placeholder="Opcional: assunto ou capítulo"></label>
+          <button class="primary-button full-width" type="submit">Registrar estudo ✓</button>
+        </form>
+      </section>
+      <section class="panel content-panel section-gap">
+        <h2>Histórico de hoje</h2>
+        <div id="study-list" class="item-list"></div>
+      </section>
+    </section>
+
+    <section class="page" id="page-treinos">
+      <div class="page-intro">
+        <span class="eyebrow">MOVIMENTO E BEM-ESTAR</span>
+        <h1>Meus treinos</h1>
+        <p>Registre suas atividades e celebre sua constância.</p>
+      </div>
+      <section class="panel content-panel">
+        <h2>Registrar atividade</h2>
+        <form id="workout-form" class="form-grid">
+          <label>Atividade
+            <select id="workout-type">
+              <option>Musculação</option>
+              <option>Caminhada</option>
+              <option>Corrida</option>
+              <option>Alongamento</option>
+              <option>Yoga</option>
+              <option>Ciclismo</option>
+              <option>Outro</option>
+            </select>
+          </label>
+          <label>Duração
+            <select id="workout-duration">
+              <option value="15">15 minutos</option>
+              <option value="30" selected>30 minutos</option>
+              <option value="45">45 minutos</option>
+              <option value="60">1 hora</option>
+              <option value="90">1h30</option>
+              <option value="120">2 horas</option>
+            </select>
+          </label>
+          <label class="full-width">Observações<input id="workout-notes" maxlength="180" placeholder="Opcional: atividade ou observações"></label>
+          <button class="primary-button full-width" type="submit">Salvar atividade ✓</button>
+        </form>
+      </section>
+      <section class="panel content-panel section-gap">
+        <h2>Atividades de hoje</h2>
+        <div id="workout-list" class="item-list"></div>
+      </section>
+    </section>
+
+    <section class="page" id="page-habitos">
+      <div class="page-intro">
+        <span class="eyebrow">CUIDAR DE SI TAMBÉM É PROGRESSO</span>
+        <h1>Meus hábitos</h1>
+        <p>Pequenas ações que ajudam a cuidar de você.</p>
+      </div>
+      <section class="panel content-panel">
+        <div class="section-title compact">
+          <div><h2>Seu dia de hoje</h2><p id="habit-summary">Marque os hábitos que realizou.</p></div>
+        </div>
+        <div id="habit-list" class="item-list"></div>
+        <form id="habit-form" class="add-form section-gap">
+          <input id="habit-title" maxlength="70" placeholder="Adicionar um hábito..." required>
+          <button class="primary-button" type="submit">＋ Criar hábito</button>
+        </form>
+      </section>
+    </section>
+
+    <section class="page" id="page-configuracoes">
+      <div class="page-intro">
+        <span class="eyebrow">DO SEU JEITO</span>
+        <h1>Configurações</h1>
+        <p>Personalize seu espaço pessoal.</p>
+      </div>
+      <section class="panel content-panel">
+        <h2>Personalização</h2>
+        <label class="settings-label">Seu nome
+          <input id="user-name" maxlength="35" placeholder="Como gostaria de ser chamada?">
+        </label>
+        <button class="primary-button section-gap" id="save-settings" type="button">Salvar preferências</button>
+      </section>
+      <section class="panel content-panel section-gap">
+        <h2>Seus dados</h2>
+        <p class="muted small-text">Os dados ficam salvos neste navegador. Limpar os dados remove tarefas, sessões, hábitos e preferências salvos neste dispositivo.</p>
+        <button class="danger-button section-gap" id="clear-data" type="button">Apagar meus dados locais</button>
+      </section>
+    </section>
+
+    <footer class="footer">ALVA <span>✳</span> Seu espaço, seu ritmo.</footer>
+  </main>
+
+  <nav class="mobile-nav" aria-label="Navegação móvel">
+    <button class="mobile-link active" data-page="inicio"><span>⌂</span><small>Início</small></button>
+    <button class="mobile-link" data-page="rotina"><span>◷</span><small>Rotina</small></button>
+    <button class="mobile-link" data-page="estudos"><span>▤</span><small>Estudos</small></button>
+    <button class="mobile-link" data-page="treinos"><span>⌁</span><small>Treinos</small></button>
+    <button class="mobile-link" data-page="habitos"><span>✳</span><small>Hábitos</small></button>
+  </nav>
+</body>
+</html>
